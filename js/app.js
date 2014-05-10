@@ -2,6 +2,8 @@ $(document).ready(function(){
 
 	var geocoder = new google.maps.Geocoder();
 
+	var debug = true;
+
 	var api = {
 		'submitReport':'',
 		'getReports':''
@@ -9,7 +11,20 @@ $(document).ready(function(){
 
 	var base_url = 'http://localhost/hack/zariyahack/';
 
-	var debug = true;
+	var customSettings = {};
+	customSettings.language = "en";
+
+	if(localStorage.getItem('language') != null){
+		customSettings.language = localStorage.getItem('language');
+	}
+
+	log("Langauge: "+customSettings.language);
+
+	
+
+	//Local Database
+	var zariya = {};
+	zariya.indexedDB = {};
 
 	init();
 
@@ -111,5 +126,12 @@ $(document).ready(function(){
 			console.log(message);
 		}
 	}
+
+	//Langauge selection
+	$(document).on("click","#languages li",function(){
+		var language = $(this).attr("data-language");
+		localStorage.setItem('language',language);
+		customSettings.language = language;
+	});
 
 });
