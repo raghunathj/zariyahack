@@ -94,6 +94,9 @@ $(document).ready(function(){
 				if (status == google.maps.GeocoderStatus.OK) {
 					log("GEO REVERSE STA=============");
 					log(results);
+					if(results.length >0){
+						$("#location").val(results[0]['formatted_address']);
+					}
 					log("GEO REVERSE END=============");
 				}else{
 					return false;
